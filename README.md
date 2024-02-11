@@ -28,7 +28,7 @@ docker build . --build-arg USERNAME=username -t esp-idf:v5.1.2
 ## Basic Usage
 
 I usually run bash and then cd to a source directory and do my build.
-I mount /dev/bus/usb so I can use the /dev/ttyUSBx devices to program te ESP32.
+I mount /dev/bus/usb so I can use the /dev/ttyUSBx devices to program the ESP32.
 
 here is the basic command I use:
 
@@ -40,7 +40,7 @@ docker run --rm --privileged  -v /dev/bus/usb:/dev/bus/usb \
 If you need to be root you can change bash to 
 ```bash
 docker run --rm --privileged  -v /dev/bus/usb:/dev/bus/usb \
--v esp32_home_dir_username:/home/username -v ~/src:/home/mlw/src \
+-v esp32_home_dir_username:/home/username -v ~/src:/home/username/src \
 -it esp-idf:v5.1.2 sudo bash
 ```
 
