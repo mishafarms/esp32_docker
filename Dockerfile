@@ -204,5 +204,7 @@ USER root
 #COPY esp32_devkitj_v1.cfg /opt/esp/tools/openocd-esp32/v0.10.0-esp32-20210902/openocd-esp32/share/openocd/scripts/interface/ftdi/
 
 COPY entrypoint.sh /opt/esp/entrypoint.sh
+RUN chmod +x /opt/esp/entrypoint.sh
+
 ENTRYPOINT [ "/opt/esp/entrypoint.sh" ]
 CMD [ "/bin/bash" ]
