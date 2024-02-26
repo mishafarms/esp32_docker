@@ -148,14 +148,16 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
  && gosu nobody true
 
 ARG USERNAME=esp32_user
+ARG USERID=1000
 ENV USERNAME=$USERNAME
+ENV USERID=$USERID
 
 RUN echo "# allow $USERNAME full permission\n\n $USERNAME ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
-RUN useradd -d /home/$USERNAME -m -s /bin/bash $USERNAME \
+RUN useradd -u USERID -d /home/$USERNAME -m -s /bin/bash $USERNAME \
     && usermod -a -G dialout $USERNAME \
     && usermod -a -G plugdev $USERNAME
-RUN chgrp 1000 /home/$USERNAME
-RUN chown 1000 /home/$USERNAME
+RUN chgrp $USERID /home/$USERNAME
+RUN chown $USERID /home/$USERNAME
 
 RUN sed -i '/#if \[ -f \/etc\/bash_completion/,/fi/{s/^#//}' /root/.bashrc
 RUN sed -i 's/^/#/' /etc/apt/apt.conf.d/docker-clean
