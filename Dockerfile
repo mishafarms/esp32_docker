@@ -153,7 +153,7 @@ ENV USERNAME=$USERNAME
 ENV USERID=$USERID
 
 RUN echo "# allow $USERNAME full permission\n\n $USERNAME ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers
-RUN useradd -u USERID -d /home/$USERNAME -m -s /bin/bash $USERNAME \
+RUN useradd -u $USERID -d /home/$USERNAME -m -s /bin/bash $USERNAME \
     && usermod -a -G dialout $USERNAME \
     && usermod -a -G plugdev $USERNAME
 RUN chgrp $USERID /home/$USERNAME
@@ -200,6 +200,8 @@ RUN corepack enable \
 RUN npm install -g node-gyp
 
 USER root
+
+RUN apt install -y dosfstools
 
 # I am not installing these yet. They are for using opencd and I have not tested their use in a long time.
 #COPY mishafarms.cfg /opt/esp/tools/openocd-esp32/v0.10.0-esp32-20210902/openocd-esp32/share/openocd/scripts/interface/ftdi/
