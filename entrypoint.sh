@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+sudo chmod a+rw /dev/loop0
+
 # Use the USERNAME environment variable
 USERNAME=${USERNAME:-esp32_user}  # Fallback to 'esp32_user' if not set
 

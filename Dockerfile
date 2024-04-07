@@ -201,7 +201,10 @@ RUN npm install -g node-gyp
 
 USER root
 
+RUN apt install -y fuse
+# install the dostools in case we want a fat filesystem, littlefs2 is better for embedded flash though.
 RUN apt install -y dosfstools
+COPY lfs /usr/local/bin
 
 # I am not installing these yet. They are for using opencd and I have not tested their use in a long time.
 #COPY mishafarms.cfg /opt/esp/tools/openocd-esp32/v0.10.0-esp32-20210902/openocd-esp32/share/openocd/scripts/interface/ftdi/
